@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.utils import timezone
 from datetime import timedelta
+from .utils import enviar_email_confirmacion
 
 class ReservaViewSet(viewsets.ModelViewSet):  # ¡Cambia el nombre a ViewSet!
     queryset = Reserva.objects.all()
@@ -30,3 +31,12 @@ class DisponibilidadView(APIView):
         disponible = reservas_existentes < 10
 
         return Response({'disponible': disponible, 'mesas_disponibles': 10 - reservas_existentes})
+
+
+class ReservaListCreate(generics.ListCreateAPIView):
+    queryset = Reserva.objects.all()
+    serializer_class = ReservaSerializer
+
+    def perform_create(self, serializer):
+        reserva = serializer.save()
+        enviar_email_confirmacion(reserva)
