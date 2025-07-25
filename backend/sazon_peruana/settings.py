@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'reservas',
     'djangular',
     'crispy_forms',
+    'rest_framework',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
