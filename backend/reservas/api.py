@@ -1,6 +1,6 @@
 
-from rest_framework import viewsets
-from .models import Reserva
+from rest_framework import viewsets, generics
+from .models import Reserva, Mesa
 from .serializers import ReservaSerializer
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -18,6 +18,10 @@ def mesas_disponibles(request):
 class ReservaViewSet(viewsets.ModelViewSet):  # ¡Cambia el nombre a ViewSet!
     queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
+    
+    def perform_create(self, serializer):
+        reserva = serializer.save()
+        enviar_email_confirmacion(reserva)
 
 
 class DisponibilidadView(APIView):
@@ -38,12 +42,3 @@ class DisponibilidadView(APIView):
         disponible = reservas_existentes < 10
 
         return Response({'disponible': disponible, 'mesas_disponibles': 10 - reservas_existentes})
-
-
-class ReservaListCreate(generics.ListCreateAPIView):
-    queryset = Reserva.objects.all()
-    serializer_class = ReservaSerializer
-
-    def perform_create(self, serializer):
-        reserva = serializer.save()
-        enviar_email_confirmacion(reserva)

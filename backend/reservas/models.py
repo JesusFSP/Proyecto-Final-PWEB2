@@ -4,6 +4,9 @@ class Mesa(models.Model):
     numero = models.PositiveIntegerField(unique=True)
     capacidad = models.PositiveIntegerField()
     ubicacion = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return f"Mesa {self.numero} ({self.capacidad} personas)"
 
 
 class Reserva(models.Model):

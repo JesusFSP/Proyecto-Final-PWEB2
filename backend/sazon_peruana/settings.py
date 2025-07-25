@@ -16,8 +16,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'tu-email@gmail.com'
-EMAIL_HOST_PASSWORD = 'tu-contraseña'
+EMAIL_HOST_USER = 'jsilva@unsa.edu.pe'
+EMAIL_HOST_PASSWORD = 'gun3ound6od'
 DEFAULT_FROM_EMAIL = 'Sazón Peruana <reservas@sazonperuana.com>'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
