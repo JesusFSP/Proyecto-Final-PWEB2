@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from reservas import views
 from rest_framework import routers
-from reservas.api import ReservaListCreate
+from reservas.api import ReservaViewSet 
 from reservas.api import DisponibilidadView
 
 
 router = routers.DefaultRouter()
-router.register(r'reservas', ReservaListCreate, basename='reserva')
+router.register(r'reservas', ReservaViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +32,5 @@ urlpatterns = [
     path('reservas/nueva/', views.crear_reserva, name='crear_reserva'),
     path('api/', include(router.urls)),
     path('api/disponibilidad/', DisponibilidadView.as_view(), name='disponibilidad'),
+    path('api/', include(router.urls)),
 ]

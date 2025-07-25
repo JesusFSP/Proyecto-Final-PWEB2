@@ -1,4 +1,5 @@
-from rest_framework import generics
+
+from rest_framework import viewsets
 from .models import Reserva
 from .serializers import ReservaSerializer
 from rest_framework.views import APIView
@@ -6,7 +7,7 @@ from rest_framework.response import Response
 from django.utils import timezone
 from datetime import timedelta
 
-class ReservaListCreate(generics.ListCreateAPIView):
+class ReservaViewSet(viewsets.ModelViewSet):  # ¡Cambia el nombre a ViewSet!
     queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
 

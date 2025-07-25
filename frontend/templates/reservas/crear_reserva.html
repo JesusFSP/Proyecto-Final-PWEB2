@@ -40,6 +40,13 @@
                 ng-model="reserva.cantidad_personas" min="1" required>
         </div>
 
+        <div class="mb-3" ng-if="disponibilidad !== null">
+            <div class="alert" ng-class="{'alert-success': disponibilidad, 'alert-danger': !disponibilidad}">
+                <span ng-if="disponibilidad">¡Hay mesas disponibles para esta fecha y hora!</span>
+                <span ng-if="!disponibilidad">No hay mesas disponibles para esta fecha y hora. Por favor, seleccione otro horario.</span>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary"
             ng-disabled="reservaForm.$invalid">
             Realizar Reserva
