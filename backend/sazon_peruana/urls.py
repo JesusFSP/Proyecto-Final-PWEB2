@@ -19,6 +19,7 @@ from django.urls import path, include
 from reservas import views
 from rest_framework import routers
 from reservas.api import ReservaListCreate
+from reservas.api import DisponibilidadView
 
 
 router = routers.DefaultRouter()
@@ -30,4 +31,5 @@ urlpatterns = [
     path('reservas/', views.lista_reservas, name='lista_reservas'),
     path('reservas/nueva/', views.crear_reserva, name='crear_reserva'),
     path('api/', include(router.urls)),
+    path('api/disponibilidad/', DisponibilidadView.as_view(), name='disponibilidad'),
 ]
