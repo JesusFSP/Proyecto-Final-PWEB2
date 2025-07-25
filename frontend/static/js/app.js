@@ -25,3 +25,10 @@ app.controller('ReservaController', function($scope, $http) {
     ], $scope.verificarDisponibilidad);
 
 });
+
+app.controller('ConsultaController', function($scope, $http) {
+    $http.get('/api/mesas_disponibles/?fecha=2025-12-31')
+        .then(function(response) {
+            $scope.mesas = response.data.mesas;
+        });
+});

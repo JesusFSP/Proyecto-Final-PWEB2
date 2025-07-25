@@ -3,10 +3,17 @@ from rest_framework import viewsets
 from .models import Reserva
 from .serializers import ReservaSerializer
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.utils import timezone
 from datetime import timedelta
 from .utils import enviar_email_confirmacion
+
+@api_view(['GET'])
+def mesas_disponibles(request):
+    fecha = request.GET.get('fecha')
+    mesas = Mesa.objects.exclude(reserva__fecha_reserva=fecha)
+    return Response({'mesas': [{'numero': m.numero, 'capacidad': m.capacidad} for m in mesas]})
 
 class ReservaViewSet(viewsets.ModelViewSet):  # ¡Cambia el nombre a ViewSet!
     queryset = Reserva.objects.all()
