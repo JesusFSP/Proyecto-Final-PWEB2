@@ -2,6 +2,7 @@ asgiref==3.9.1
 Django==5.2.4
 django-crispy-forms==2.4
 django-environ==0.12.0
+djangorestframework==3.16.0
 djangular==0.2.7
 python-decouple==3.8
 sqlparse==0.5.3
