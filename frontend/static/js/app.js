@@ -10,11 +10,13 @@ app.controller('ReservaController', function ($scope, $http) {
 
     $scope.formatTime = function (timeString) {
         if (!timeString) return null;
-        return timeString + ':00';
+        const parts = timeString.split(':');
+        const hours = parts[0].padStart(2, '0');
+        const minutes = parts[1].padStart(2, '0');
+        return `${hours}:${minutes}:00`;
     };
 
     $scope.submitForm = function () {
-        // Prepara los datos con formatos correctos
         const datosEnvio = {
             nombre_cliente: $scope.reserva.nombre_cliente,
             correo_cliente: $scope.reserva.correo_cliente,
