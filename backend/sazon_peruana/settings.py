@@ -17,7 +17,7 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jsilva@unsa.edu.pe'
-EMAIL_HOST_PASSWORD = 'gun3ound6od'
+EMAIL_HOST_PASSWORD = '123456'
 DEFAULT_FROM_EMAIL = 'reservas@sazonperuana.com'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

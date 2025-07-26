@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import Reserva
 from django.core.mail import send_mail
 from django.shortcuts import redirect
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import ReservaSerializer
 
 
 def home(request):
@@ -19,7 +23,6 @@ def crear_reserva(request):
         if form.is_valid():
             reserva = form.save()
 
-            # Enviar correo de confirmación
             send_mail(
                 'Confirmación de Reserva - Sazón Peruana',
                 f'Detalles de tu reserva:\n\nNombre: {reserva.nombre_cliente}\nFecha: {reserva.fecha_reserva}\nHora: {reserva.hora_reserva}',
