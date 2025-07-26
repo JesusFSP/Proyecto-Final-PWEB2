@@ -36,6 +36,18 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+REST_FRAMEWORK = {
+    'DATE_INPUT_FORMATS': ['%Y-%m-%d'],
+    'TIME_INPUT_FORMATS': ['%H:%M:%S'],
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -118,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 
 USE_I18N = True
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Mesa(models.Model):
     numero = models.PositiveIntegerField(unique=True)
@@ -15,7 +16,12 @@ class Reserva(models.Model):
     telefono_cliente = models.CharField(max_length=15)
     fecha_reserva = models.DateField()
     hora_reserva = models.TimeField()
-    cantidad_personas = models.PositiveIntegerField()
+    cantidad_personas = models.PositiveIntegerField(
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(20)
+        ]
+    )
     estado = models.CharField(max_length=20,
         choices=[('pendiente', 'Pendiente'),
                 ('confirmada', 'Confirmada'),
