@@ -21,20 +21,13 @@
 
         <div class="mb-3">
             <label for="fecha" class="form-label">Fecha de la Reserva</label>
-            <input type="date" 
-               ng-model="reserva.fecha_reserva"
-               min="{{ today | date:'yyyy-MM-dd' }}"
-               required>
+            <input type="date" ng-model="reserva.fecha_reserva" min="{{ today | date:'yyyy-MM-dd' }}" required>
         </div>
 
 
         <div class="mb-3">
             <label for="hora" class="form-label">Hora de la Reserva</label>
-            <input type="time"
-               ng-model="reserva.hora_reserva"
-               min="11:00"
-               max="23:00"
-               required>
+            <input type="time" ng-model="reserva.hora_reserva" min="11:00" max="23:00" required>
         </div>
 
         <div class="mb-3">
@@ -51,8 +44,8 @@
             </div>
         </div>
 
-        <button type="submit" ng-disabled="reservaForm.$invalid">
-            Reservar
+        <button type="submit" class="btn btn-primary" ng-disabled="reservaForm.$invalid">
+            Confirmar Reserva
         </button>
     </form>
 </div>
@@ -60,17 +53,18 @@
 
 {% block scripts %}
 <script>
-    app.controller('ReservaController', function ($scope, $http) {
+    app.controller('ReservaController', function ($scope, $http, $window) {
         $scope.reserva = {};
 
         $scope.submitForm = function () {
             if ($scope.reservaForm.$valid) {
                 $http.post('/api/reservas/', $scope.reserva)
                     .then(function (response) {
-                        alert('¡Reserva creada con éxito!');
-                        $scope.reserva = {};
-                    }, function (error) {
-                        alert('Error al crear la reserva: ' + error.data.error);
+                        alert('¡Reserva confirmada! Se ha enviado un correo de confirmación');
+                        $window.location.href = '/';  // Redirige a la página principal
+                    })
+                    .catch(function (error) {
+                        alert('Error: ' + error.data.detail || 'Error al crear reserva');
                     });
             }
         };

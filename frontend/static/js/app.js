@@ -1,3 +1,4 @@
+var app = angular.module('SazonPeruanaApp', []);
 
 app.controller('ReservaController', function ($scope, $http) {
     $scope.reserva = {};
@@ -25,6 +26,18 @@ app.controller('ReservaController', function ($scope, $http) {
             hora_reserva: $scope.formatTime($scope.reserva.hora_reserva),
             cantidad_personas: parseInt($scope.reserva.cantidad_personas)
         };
+
+        if ($scope.reservaForm.$valid) {
+            $http.post('/api/reservas/', $scope.reserva)
+                .then(function(response) {
+                    alert('¡Reserva confirmada! Se ha enviado un correo de confirmación');
+                    $window.location.href = '/';  // Redirige a la página principal
+                })
+                .catch(function(error) {
+                    console.error("Error completo:", error);
+                    alert('Error: ' + (error.data.detail || JSON.stringify(error.data)));
+                });
+        }
 
         console.log("Datos a enviar:", datosEnvio);
 

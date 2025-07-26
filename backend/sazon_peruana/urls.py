@@ -20,7 +20,8 @@ from reservas import views
 from rest_framework import routers
 from reservas.api import ReservaViewSet 
 from reservas.api import DisponibilidadView
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'reservas', ReservaViewSet)
@@ -33,4 +34,4 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/disponibilidad/', DisponibilidadView.as_view(), name='disponibilidad'),
     path('api/', include(router.urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

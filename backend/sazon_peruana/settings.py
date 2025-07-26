@@ -13,16 +13,18 @@ import os
 from pathlib import Path
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jsilva@unsa.edu.pe'
 EMAIL_HOST_PASSWORD = 'gun3ound6od'
-DEFAULT_FROM_EMAIL = 'Sazón Peruana <reservas@sazonperuana.com>'
+DEFAULT_FROM_EMAIL = 'reservas@sazonperuana.com'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -141,7 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, '../frontend/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, '../frontend/static'),]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
