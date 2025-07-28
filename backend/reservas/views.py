@@ -85,6 +85,7 @@ class ReservaDetailView(DetailView):
 class ReservaCreateView(LoginRequiredMixin, CreateView):
     model         = Reserva
     form_class    = ReservaForm
+    fields = '__all__'
     template_name = 'reservas/reserva_form.html'
     success_url   = reverse_lazy('reservas:list')
 
@@ -92,6 +93,7 @@ class ReservaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
     permission_required = 'reservas.change_reserva'
     model         = Reserva
     form_class    = ReservaForm
+    fields = '__all__'
     template_name = 'reservas/reserva_form.html'
     success_url   = reverse_lazy('reservas:list')
 
