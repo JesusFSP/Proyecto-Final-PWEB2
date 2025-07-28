@@ -2,9 +2,15 @@ from .models import Reserva
 from rest_framework import serializers
 from django.utils import timezone
 from datetime import datetime
+from clientes.models import Cliente
 
+class ClienteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        fields = '__all__'
 
 class ReservaSerializer(serializers.ModelSerializer):
+    clientes = ClienteSerializer(many=True, read_only=True)
     class Meta:
         model = Reserva
         fields = '__all__'
