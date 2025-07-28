@@ -28,6 +28,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from weasyprint import HTML
 
+from django.utils import timezone
+
 def reporte_pdf(request):
     reservas = Reserva.objects.all().order_by('fecha_reserva')
     html_string = render_to_string('reservas/reporte_pdf.html', {'reservas': reservas})
@@ -84,20 +86,42 @@ class ReservaDetailView(DetailView):
     template_name       = 'reservas/reserva_detail.html'
     context_object_name = 'reserva'
 
-class ReservaCreateView(LoginRequiredMixin, CreateView):
-    model         = Reserva
-    form_class    = ReservaForm
+class ReservaCreateView(CreateView):
+    model = Reserva
+    form_class = ReservaForm
     template_name = 'reservas/reserva_form.html'
-    success_url   = reverse_lazy('reservas:list')
+    success_url = reverse_lazy('reservas:list')
+    
+    def get_initial(self):
+        return {'fecha_reserva': timezone.now().date()}
 
-class ReservaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    permission_required = 'reservas.change_reserva'
-    model         = Reserva
-    form_class    = ReservaForm
+    def form_valid(self, form):
+        mesa = form.cleaned_data['mesa']
+        if mesa:
+            mesa.ocupada = True
+            mesa.save()
+        return super().form_valid(form)
+
+class ReservaUpdateView(UpdateView):
+    model = Reserva
+    form_class = ReservaForm
     template_name = 'reservas/reserva_form.html'
-    success_url   = reverse_lazy('reservas:list')
+    success_url = reverse_lazy('reservas:list')
 
-class ReservaDeleteView(LoginRequiredMixin, DeleteView):
-    model         = Reserva
-    template_name = 'reservas/reserva_confirm_delete.html'
-    success_url   = reverse_lazy('reservas:list')
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['initial'] = {
+            'fecha_reserva': self.object.fecha_reserva
+        }
+        return kwargs
+
+class ReservaDeleteView(DeleteView):
+    model = Reserva
+    success_url = reverse_lazy('reservas:list')
+
+    def delete(self, *args, **kwargs):
+        reserva = self.get_object()
+        if reserva.mesa:
+            reserva.mesa.ocupada = False
+            reserva.mesa.save()
+        return super().delete(*args, **kwargs)
