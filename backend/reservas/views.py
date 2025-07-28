@@ -1,49 +1,49 @@
-from django.shortcuts import render
-from .models import Reserva
-from django.core.mail import send_mail
-from django.shortcuts import redirect
-from rest_framework.decorators import api_view
+from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.viewsets import ModelViewSet
-from .serializers import ReservaSerializer
-from clientes.models import Cliente
-from clientes.serializers import ClienteSerializer
+from .models import Reserva, Cliente
+from .serializers import ReservaSerializer, ClienteSerializer
 
-class ReservaViewSet(ModelViewSet):
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView
+)
+from django.urls import reverse_lazy
+from .models import Reserva
+from .forms import ReservaForm
+
+class ReservaViewSet(viewsets.ModelViewSet):
     queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
 
-class ClienteViewSet(ModelViewSet):
+class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
 
 
-def home(request):
-    return render(request, 'reservas/home.html')
+class ReservaListView(ListView):
+    model               = Reserva
+    template_name       = 'reservas/reserva_list.html'
+    context_object_name = 'reservas'
 
+class ReservaDetailView(DetailView):
+    model               = Reserva
+    template_name       = 'reservas/reserva_detail.html'
+    context_object_name = 'reserva'
 
-def lista_reservas(request):
-    reservas = Reserva.objects.all()
-    return render(request, 'reservas/lista_reservas.html', {'reservas': reservas})
+class ReservaCreateView(LoginRequiredMixin, CreateView):
+    model         = Reserva
+    form_class    = ReservaForm
+    template_name = 'reservas/reserva_form.html'
+    success_url   = reverse_lazy('reservas:list')
 
+class ReservaUpdateView(LoginRequiredMixin, UpdateView):
+    model         = Reserva
+    form_class    = ReservaForm
+    template_name = 'reservas/reserva_form.html'
+    success_url   = reverse_lazy('reservas:list')
 
-def crear_reserva(request):
-    if request.method == 'POST':
-        form = ReservaForm(request.POST)
-        if form.is_valid():
-            reserva = form.save()
-
-            send_mail(
-                'Confirmación de Reserva - Sazón Peruana',
-                f'Detalles de tu reserva:\n\nNombre: {reserva.nombre_cliente}\nFecha: {reserva.fecha_reserva}\nHora: {reserva.hora_reserva}',
-                'reservas@sazonperuana.com',
-                [reserva.correo_cliente],
-                fail_silently=False,
-            )
-
-            return redirect('home')
-    else:
-        form = ReservaForm()
-
-    return render(request, 'reservas/crear_reserva.html', {'form': form})
+class ReservaDeleteView(LoginRequiredMixin, DeleteView):
+    model         = Reserva
+    template_name = 'reservas/reserva_confirm_delete.html'
+    success_url   = reverse_lazy('reservas:list')
