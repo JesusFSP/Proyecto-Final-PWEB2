@@ -1,11 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-reserva-list',
-  imports: [],
-  templateUrl: './reserva-list.html',
-  styleUrl: './reserva-list.scss'
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <h2>Reservas</h2>
+    <ul>
+      <li *ngFor="let r of reservas">{{ r.id }} - {{ r.fecha }}</li>
+    </ul>
+  `
 })
-export class ReservaList {
+export class ReservaListComponent implements OnInit {
+  reservas: any[] = [];
 
+  constructor(private api: ApiService) {}
+
+  ngOnInit() {
+    this.api.getReservas().subscribe(data => this.reservas = data);
+  }
 }
