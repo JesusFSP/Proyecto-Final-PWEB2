@@ -25,14 +25,14 @@
                 <a class="btn btn-sm btn-outline-danger" href="{% url 'reservas:delete' reserva.pk %}">Borrar</a>
             </td>
         </tr>
-        <a class="btn btn-success" href="{% url 'reservas:reporte_pdf' %}">
-            Generar PDF
-        </a>
         {% empty %}
         <tr>
             <td colspan="4">No hay reservas aún.</td>
         </tr>
         {% endfor %}
+        <a class="btn btn-success" href="{% url 'reservas:reporte_pdf' %}">
+            Generar PDF
+        </a>
     </tbody>
 </table>
 {% endblock %}

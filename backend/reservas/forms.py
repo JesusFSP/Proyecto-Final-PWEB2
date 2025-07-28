@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from datetime import datetime, time
 from .models import Reserva
 
 class ReservaForm(forms.ModelForm):
@@ -22,8 +23,5 @@ class ReservaForm(forms.ModelForm):
         return fecha
 
     def clean_hora_reserva(self):
-        hora = self.cleaned_data['hora_reserva']
-        # Horario de atención ejemplo 10:00 - 22:00
-        if hora < datetime.time(10, 0) or hora > datetime.time(22, 0):
-            raise ValidationError("Horario permitido de 10:00 a 22:00.")
+        hora = self.cleaned_data['hora_reserva']        
         return hora
