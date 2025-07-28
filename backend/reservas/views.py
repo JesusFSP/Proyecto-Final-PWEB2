@@ -5,7 +5,18 @@ from django.shortcuts import redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.viewsets import ModelViewSet
 from .serializers import ReservaSerializer
+from clientes.models import Cliente
+from clientes.serializers import ClienteSerializer
+
+class ReservaViewSet(ModelViewSet):
+    queryset = Reserva.objects.all()
+    serializer_class = ReservaSerializer
+
+class ClienteViewSet(ModelViewSet):
+    queryset = Cliente.objects.all()
+    serializer_class = ClienteSerializer
 
 
 def home(request):
