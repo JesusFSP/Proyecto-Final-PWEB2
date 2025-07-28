@@ -18,6 +18,6 @@ export class App {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient() // ← agrega
+    provideHttpClient()
   ]
 };
