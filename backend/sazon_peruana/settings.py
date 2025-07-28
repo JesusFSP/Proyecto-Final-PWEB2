@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reservas',
+    'reservas.apps.ReservasConfig',
     'djangular',
     'clientes',
     'crispy_forms',

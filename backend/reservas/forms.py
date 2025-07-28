@@ -23,5 +23,5 @@ class ReservaForm(forms.ModelForm):
         return fecha
 
     def clean_hora_reserva(self):
-        hora = self.cleaned_data['hora_reserva']        
+        hora = self.cleaned_data['hora_reserva']
         return hora
