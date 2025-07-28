@@ -1,29 +1,15 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import (
-    ReservaViewSet,
-    ClienteViewSet,
-    ReservaListView,
-    ReservaDetailView,
-    ReservaCreateView,
-    ReservaUpdateView,
-    ReservaDeleteView,
-    reservas_pdf,  # ← importamos la vista PDF
-)
+from . import views
 
 app_name = 'reservas'
 
-router = DefaultRouter()
-router.register(r'reservas', ReservaViewSet)
-router.register(r'clientes', ClienteViewSet)
-
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('pdf/', reservas_pdf, name='pdf'),
-    path('',           ReservaListView.as_view(),    name='list'),
-    path('<int:pk>/',  ReservaDetailView.as_view(),  name='detail'),
-    path('nueva/',     ReservaCreateView.as_view(),  name='create'),
-    path('<int:pk>/editar/', ReservaUpdateView.as_view(), name='update'),
-    path('<int:pk>/borrar/', ReservaDeleteView.as_view(), name='delete'),
+    path('', views.ReservaListView.as_view(), name='lista'),
+    path('<int:pk>/', views.ReservaDetailView.as_view(), name='detalle'),
+    path('crear/', views.ReservaCreateView.as_view(), name='crear'),
+    path('<int:pk>/editar/', views.ReservaUpdateView.as_view(), name='editar'),
+    path('<int:pk>/eliminar/', views.ReservaDeleteView.as_view(), name='eliminar'),
+    path('api/disponibilidad/', views.disponibilidad_json, name='api_disponibilidad'),
 ]

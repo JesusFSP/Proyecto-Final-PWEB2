@@ -28,7 +28,7 @@ class Reserva(models.Model):
                 ('cancelada', 'Cancelada')],
         default='pendiente')
     creado_en = models.DateTimeField(auto_now_add=True)
-    mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True)
+    mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"Reserva de {self.nombre_cliente} para el {self.fecha_reserva}"

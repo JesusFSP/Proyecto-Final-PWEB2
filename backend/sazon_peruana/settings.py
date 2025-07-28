@@ -14,7 +14,7 @@ from pathlib import Path
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_PORT = '2525'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jsilva@unsa.edu.pe'
 EMAIL_HOST_PASSWORD = '123456'
