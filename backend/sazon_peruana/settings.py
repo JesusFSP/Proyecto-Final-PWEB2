@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'reservas',
     'djangular',
+    'clientes',
     'crispy_forms',
     'rest_framework',
 ]
