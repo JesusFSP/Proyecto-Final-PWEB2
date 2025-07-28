@@ -5,29 +5,34 @@
 <a class="btn btn-primary mb-3" href="{% url 'reservas:create' %}">Nueva Reserva</a>
 
 <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Título / Motivo</th>
-      <th>Fecha</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for reserva in reservas %}
-    <tr>
-      <td>{{ reserva.pk }}</td>
-      <td>{{ reserva }}</td>
-      <td>{{ reserva.fecha|date:"d/m/Y H:i" }}</td>
-      <td>
-        <a class="btn btn-sm btn-outline-info" href="{% url 'reservas:detail' reserva.pk %}">Ver</a>
-        <a class="btn btn-sm btn-outline-warning" href="{% url 'reservas:update' reserva.pk %}">Editar</a>
-        <a class="btn btn-sm btn-outline-danger" href="{% url 'reservas:delete' reserva.pk %}">Borrar</a>
-      </td>
-    </tr>
-  {% empty %}
-    <tr><td colspan="4">No hay reservas aún.</td></tr>
-  {% endfor %}
-  </tbody>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Título / Motivo</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reserva in reservas %}
+        <tr>
+            <td>{{ reserva.pk }}</td>
+            <td>{{ reserva }}</td>
+            <td>{{ reserva.fecha|date:"d/m/Y H:i" }}</td>
+            <td>
+                <a class="btn btn-sm btn-outline-info" href="{% url 'reservas:detail' reserva.pk %}">Ver</a>
+                <a class="btn btn-sm btn-outline-warning" href="{% url 'reservas:update' reserva.pk %}">Editar</a>
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'reservas:delete' reserva.pk %}">Borrar</a>
+            </td>
+        </tr>
+        <a class="btn btn-success" href="{% url 'reservas:reporte_pdf' %}">
+            Generar PDF
+        </a>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay reservas aún.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

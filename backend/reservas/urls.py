@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:pk>/editar/', views.ReservaUpdateView.as_view(), name='update'),
     path('<int:pk>/eliminar/', views.ReservaDeleteView.as_view(), name='delete'),
     path('api/disponibilidad/', views.disponibilidad_json, name='api_disponibilidad'),
+    path('reporte/pdf/', views.reporte_pdf, name='reporte_pdf'),
 ]

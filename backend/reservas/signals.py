@@ -8,8 +8,8 @@ def mail_nueva_reserva(sender, instance, created, **kwargs):
     if created:
         send_mail(
             'Nueva reserva',
-            f'Hola, tu reserva #{instance.pk} está confirmada para el {instance.fecha}.',
-            'reservas@sazonperuana.com',
-            [instance.email],
+            f'Reserva para {instance.nombre_cliente} el {instance.fecha_reserva} a las {instance.hora_reserva}',
+            'tucorreo@gmail.com',
+            [instance.correo_cliente],
             fail_silently=False,
         )

@@ -29,10 +29,12 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 
 def reporte_pdf(request):
-    reservas = Reserva.objects.all()
-    html = render_to_string('reservas/reporte.html', {'reservas': reservas})
-    pdf = HTML(string=html).write_pdf()
-    return HttpResponse(pdf, content_type='application/pdf')
+    reservas = Reserva.objects.all().order_by('fecha_reserva')
+    html_string = render_to_string('reservas/reporte_pdf.html', {'reservas': reservas})
+    pdf = HTML(string=html_string).write_pdf()
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="reservas.pdf"'
+    return response
 
 def confirmar_reserva(request, reserva_id):
     reserva = Reserva.objects.get(id=reserva_id)
@@ -85,7 +87,6 @@ class ReservaDetailView(DetailView):
 class ReservaCreateView(LoginRequiredMixin, CreateView):
     model         = Reserva
     form_class    = ReservaForm
-    fields = '__all__'
     template_name = 'reservas/reserva_form.html'
     success_url   = reverse_lazy('reservas:list')
 
@@ -93,7 +94,6 @@ class ReservaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
     permission_required = 'reservas.change_reserva'
     model         = Reserva
     form_class    = ReservaForm
-    fields = '__all__'
     template_name = 'reservas/reserva_form.html'
     success_url   = reverse_lazy('reservas:list')
 

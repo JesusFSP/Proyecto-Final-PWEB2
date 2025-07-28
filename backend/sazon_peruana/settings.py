@@ -13,12 +13,12 @@ import os
 from pathlib import Path
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'jsilva@unsa.edu.pe'
-EMAIL_HOST_PASSWORD = '123456'
-DEFAULT_FROM_EMAIL = 'reservas@sazonperuana.com'
+EMAIL_HOST_USER = 'kvothessn@gmail.com'
+EMAIL_HOST_PASSWORD = 'hwld liez byyr cjgm '
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'djangular',
     'clientes',
     'crispy_forms',
+    'crispy_bootstrap5',
     'rest_framework',
 ]
 
