@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Detalle Reserva{% endblock %}
+{% block content %}
+<h2>Reserva #{{ reserva.pk }}</h2>
+<ul class="list-group mb-3">
+  <li class="list-group-item"><strong>Fecha:</strong> {{ reserva.fecha|date:"d/m/Y H:i" }}</li>
+  <li class="list-group-item"><strong>Descripción:</strong> {{ reserva.descripcion|default:"Sin descripción" }}</li>
+</ul>
+
+<a class="btn btn-primary" href="{% url 'reservas:list' %}">Volver</a>
+<a class="btn btn-warning" href="{% url 'reservas:update' reserva.pk %}">Editar</a>
+<a class="btn btn-danger" href="{% url 'reservas:delete' reserva.pk %}">Borrar</a>
+{% endblock %}
