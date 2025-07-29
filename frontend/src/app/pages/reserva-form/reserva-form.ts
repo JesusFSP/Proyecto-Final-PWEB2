@@ -1,32 +1,25 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { ApiService } from '../services/api.service';
+import { ApiService, Reserva } from '../../services/api';
 
 @Component({
   selector: 'app-reserva-form',
-  standalone: true,
-  imports: [FormsModule, MatInputModule, MatButtonModule],
-  template: `
-    <h2>Nueva Reserva</h2>
-    <form (ngSubmit)="guardar()">
-      <mat-form-field>
-        <input matInput placeholder="Fecha" [(ngModel)]="model.fecha" name="fecha" />
-      </mat-form-field>
-      <br />
-      <button mat-raised-button color="primary" type="submit">Guardar</button>
-    </form>
-  `,
+  templateUrl: './reserva-form.html',
+  styleUrls: ['./reserva-form.scss'],
 })
 export class ReservaFormComponent {
-  model = { fecha: '' };
+  reserva: Reserva = {
+    nombre_cliente: '',
+    correo_cliente: '',
+    fecha_reserva: '',
+    hora_reserva: '',
+    cantidad_personas: 1,
+  };
 
   constructor(private api: ApiService) {}
 
   guardar() {
-    this.api.postReserva(this.model).subscribe(() => {
-      alert('Reserva creada');
+    this.api.createReserva(this.reserva).subscribe(() => {
+      alert('¡Reserva creada!');
     });
   }
 }

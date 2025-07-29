@@ -2,25 +2,36 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+export interface Reserva {
+  id?: number;
+  nombre_cliente: string;
+  correo_cliente: string;
+  fecha_reserva: string;
+  hora_reserva: string;
+  cantidad_personas: number;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
 export class ApiService {
-  private api = '/api';  // proxy redirige a http://localhost:8000/api
+  private apiUrl = 'http://localhost:8000/api/reservas/';
 
   constructor(private http: HttpClient) {}
 
-  getReservas(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.api}/reservas/`);
+  getReservas(): Observable<Reserva[]> {
+    return this.http.get<Reserva[]>(this.apiUrl);
   }
 
-  postReserva(data: any): Observable<any> {
-    return this.http.post<any>(`${this.api}/reservas/`, data);
+  createReserva(reserva: Reserva): Observable<Reserva> {
+    return this.http.post<Reserva>(this.apiUrl, reserva);
   }
 
-  getClientes(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.api}/clientes/`);
+  updateReserva(id: number, reserva: Reserva): Observable<Reserva> {
+    return this.http.put<Reserva>(`${this.apiUrl}${id}/`, reserva);
   }
 
-  postCliente(data: any): Observable<any> {
-    return this.http.post<any>(`${this.api}/clientes/`, data);
+  deleteReserva(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
   }
 }

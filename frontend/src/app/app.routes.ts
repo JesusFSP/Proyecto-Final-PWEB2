@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-import { ReservaListComponent } from './pages/reserva-list';
-import { ReservaFormComponent } from './pages/reserva-form';
-import { HomeComponent } from './pages/home/home.component';
+
+import { HomeComponent } from './pages/home/home';
+import { ReservaListComponent } from './pages/reserva-list/reserva-list';
+import { ReservaFormComponent } from './pages/reserva-form/reserva-form';
 
 export const routes: Routes = [
-  { path: '', component: ReservaListComponent },
-  { path: 'nueva', component: ReservaFormComponent },
-  { path: '**', redirectTo: '' },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./pages/home/home').then(m => m.Home) },
+  { path: 'home', component: HomeComponent },
+  { path: 'reservas', component: ReservaListComponent },
+  { path: 'reservas/crear', component: ReservaFormComponent },
+  { path: 'reservas/editar/:id', component: ReservaFormComponent },
 ];

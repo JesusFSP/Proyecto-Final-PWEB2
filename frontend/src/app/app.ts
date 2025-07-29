@@ -2,8 +2,9 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http'; // ← agrega
+import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
+import { ApiService } from './services/api';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class App {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient()
-  ]
+    provideHttpClient(),
+    ApiService,
+  ],
 };
