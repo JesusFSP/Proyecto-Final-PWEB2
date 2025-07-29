@@ -30,7 +30,7 @@
             <td colspan="4">No hay reservas aún.</td>
         </tr>
         {% endfor %}
-        <a class="btn btn-success" href="{% url 'reservas:reporte_pdf' %}">
+        <a class="btn btn-success" target="_blank" href="{% url 'reservas:reporte_pdf' %}">
             Generar PDF
         </a>
     </tbody>
