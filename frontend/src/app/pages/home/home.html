@@ -1,45 +1,93 @@
-<div class="hero d-flex align-items-center position-relative">
-    <div class="container text-center text-white">
-        <h1 class="display-3 fw-bold animate__animated animate__fadeInDown">
-            Sazón Peruana
-        </h1>
-        <p class="lead mb-4 animate__animated animate__fadeInUp">
-            Reserva tu mesa y vive la auténtica experiencia de la gastronomía peruana.
-        </p>
-        <a routerLink="/reservas/crear" class="btn btn-warning btn-lg shadow-lg">
-            Reservar Ahora
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <div class="container">
+        <a class="navbar-brand fw-bold" routerLink="/home">
+            <i class="bi bi-fire"></i> Sazón Peruana
         </a>
-    </div>
-</div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<section class="py-5 bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" (click)="scrollToTop()">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/crear/" target="_blank">
+                        Reservar Ahora
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/" target="_blank">
+                        Ver Reservas Existentes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="hero d-flex align-items-center text-center text-white">
+    <div class="container">
+        <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">
+            Bienvenido a Sazón Peruana
+        </h1>
+        <p class="lead animate__animated animate__fadeInUp">
+            Sabores auténticos, experiencias inolvidables. Reserva tu mesa y disfruta de la mejor gastronomía peruana.
+        </p>
+
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center mt-4">
+            <a class="btn btn-warning btn-lg px-4" href="http://localhost:8000/crear/" target="_blank">
+                Reservar Ahora
+            </a>
+            <a class="btn btn-outline-light btn-lg px-4" href="http://localhost:8000/" target="_blank">
+                Ver Reservas Existentes
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light ">
     <div class="container">
         <h2 class="text-center mb-5">Nuestra Carta</h2>
         <div class="row g-4">
             <div class="col-md-6">
-                <div class="card h-100 shadow border-0">
+                <div class="card h-100 shadow-sm border-0">
                     <img src="assets/img/comidas.jpg" class="card-img-top" alt="Comidas peruanas">
                     <div class="card-body text-center">
                         <h5 class="card-title fw-bold">Comidas</h5>
                         <p class="card-text">Desde el clásico ceviche hasta el lomo saltado.</p>
-                        <a href="assets/pdf/carta-comidas.pdf" download class="btn btn-outline-primary">
+                        <a href="assets/pdf/carta_comida.pdf" download="carta_comida.pdf" class="btn btn-outline-primary">
                             Descargar PDF
                         </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card h-100 shadow border-0">
-                    <img src="assets/img/bebidas.jpg" class="card-img-top" alt="Bebidas peruanas">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="assets/img/bebidas.jpg" class="card-img-top" alt="Bebidas">
                     <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Cocteles & Bebidas</h5>
-                        <p class="card-text">Pisco Sour, Chilcano y más.</p>
-                        <a href="assets/pdf/carta-bebidas.pdf" download class="btn btn-outline-primary">
+                        <h5 class="card-title fw-bold">Bebidas</h5>
+                        <p class="card-text">Desde el clásico ceviche hasta el lomo saltado.</p>
+                        <a href="assets/pdf/carta_cocteles.pdf" download="carta_cocteles.pdf" class="btn btn-outline-primary">
                             Descargar PDF
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<section id="contacto" class="py-5 bg-dark text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">¿Tienes dudas?</h2>
+        <p class="mb-0">Escríbenos o llámanos y te ayudaremos con tu reserva.</p>
+        <a href="mailto:info@sazonperuana.com" class="btn btn-warning mt-3">Enviar correo</a>
     </div>
 </section>
